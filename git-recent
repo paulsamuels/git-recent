@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+# List out the 10 most recently committed branches.
+# Wait for input and then attempt to checkout the branch you select by typing an index.
+
+branches = `git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head`.chomp.split
+
+puts branches.map.with_index { |branch, index| "[#{index}] #{branch}" }
+
+puts "Choose from the list above" until branch = (branches[Integer(STDIN.gets.chomp)] rescue nil)
+
+`git checkout #{branch}`
