@@ -3,6 +3,8 @@
 # List out the 10 most recently committed branches.
 # Wait for input and then attempt to checkout the branch you select by typing an index.
 
+exit unless system(`git rev-parse --is-inside-work-tree`)
+
 branches = `git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head`.chomp.split
 
 puts branches.map.with_index { |branch, index| "[#{index}] #{branch}" }
