@@ -11,4 +11,4 @@ puts branches.map.with_index { |branch, index| "[#{index}] #{branch}" }
 
 puts "Choose from the list above" until branch = (branches[Integer(STDIN.gets.chomp)] rescue nil)
 
-`git checkout #{branch}`
+system "git checkout #{branch}"
