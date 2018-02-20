@@ -7,6 +7,8 @@ exit unless system(`git rev-parse --is-inside-work-tree`)
 
 branches = `git for-each-ref --sort=-committerdate refs/heads/ --format='%(refname:short)' | head`.chomp.split
 
+exit unless branches.count > 0
+
 puts branches.map.with_index { |branch, index| "[#{index}] #{branch}" }
 
 puts "Choose from the list above" until branch = (branches[Integer(STDIN.gets.chomp)] rescue nil)
